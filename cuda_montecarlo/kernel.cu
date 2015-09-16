@@ -17,33 +17,43 @@
 
 cudaError_t mcCuda(double *val, double *val1, const int& num_sims, const double& S, const double& K, const double& r, const double& v, const double& T);
 
-__global__ void init(unsigned int seed, curandState_t* states, const int num_sims) {
+__global__ void init(unsigned int seed, curandState_t* states, double *normal, const int num_sims) {
 	int id = blockIdx.x * BLOCKSIZE + threadIdx.x;
 	if (id < num_sims) {
 		curand_init(seed, id, 0, &states[id]);
+		normal[id] = curand_normal_double(&states[id]);
 	}
 }
 
-__global__ void mcKernel(curandState_t* states, const int num_sims, const double S, const double K, const double r, const double v, const double T, double *val, double *val1) {
+__global__ void mcKernel(double *normal, const int num_sims, const double S, const double K, const double r, const double v, const double T, double *val, double *val1) {
+	__shared__ double c[BLOCKSIZE];
+	__shared__ double p[BLOCKSIZE];
     double S_adjust = S * exp(T*(r-0.5*v*v));
 	double S_cur = 0.0;
 	double payoff_sum = 0.0;
 	double payoff_sum1 = 0.0;
+	double call_temp = 0.0;
+	double put_temp = 0.0;
 	int id = blockIdx.x * BLOCKSIZE + threadIdx.x;
 	int bid = blockIdx.x;
 
 	if (id < num_sims) {
-		//for (int i = 0; i < BLOCKSIZE; ++i) {
-			double gauss_bm = curand_normal_double(&states[id]);
+			double gauss_bm = normal[id];
 			S_cur = S_adjust * exp(sqrt(v*v*T)*gauss_bm);
-			payoff_sum += max(S_cur - K, 0.0);
-			payoff_sum1 += max(K - S_cur, 0.0);
+			payoff_sum = max(S_cur - K, 0.0);
+			payoff_sum1 = max(K - S_cur, 0.0);
+			c[threadIdx.x] = (payoff_sum / num_sims) * exp(-r*T);
+			p[threadIdx.x] = (payoff_sum1 / num_sims) * exp(-r*T);
 			__syncthreads();
-		//}
+
+			for (int i = 0; i <BLOCKSIZE; ++i) {
+				call_temp += c[i];
+				put_temp += p[i];
+			}
 	}
 
-	val[id] = (payoff_sum / num_sims) * exp(-r*T);
-	val1[id] = (payoff_sum1 / num_sims) * exp(-r*T);
+	val[bid] = call_temp;
+	val1[bid] = put_temp;
 }
 
 int main() {
@@ -77,6 +87,7 @@ int main() {
 cudaError_t mcCuda(double *val, double *val1, const int& num_sims, const double& S, const double& K, const double& r, const double& v, const double& T) {
 	double * dev_val = 0;
 	double * dev_val1 = 0;
+	double * dev_normal = 0;
     cudaError_t cudaStatus;
 	curandState_t* states;
 	dim3 dimBlock(BLOCKSIZE);
@@ -114,10 +125,16 @@ cudaError_t mcCuda(double *val, double *val1, const int& num_sims, const double&
         goto Error;
     }
 
-	init<<<dimGrid, dimBlock>>>(time(0), states, num_sims);
+	cudaStatus = cudaMalloc((void**)&dev_normal, num_sims * sizeof(double));
+    if (cudaStatus != cudaSuccess) {
+        fprintf(stderr, "cudaMalloc failed!");
+        goto Error;
+    }
+
+	init<<<dimGrid, dimBlock>>>(time(0), states, dev_normal, num_sims);
 
 	cudaEventRecord(start);
-    mcKernel<<<dimGrid, dimBlock>>>(states, num_sims, S, K, r, v, T, dev_val, dev_val1);
+    mcKernel<<<dimGrid, dimBlock>>>(dev_normal, num_sims, S, K, r, v, T, dev_val, dev_val1);
 	cudaEventRecord(stop);
 	cudaEventSynchronize(stop);
 
@@ -147,11 +164,11 @@ cudaError_t mcCuda(double *val, double *val1, const int& num_sims, const double&
 
 	cudaEventRecord(start1);
 	double call = 0;
-	for (int i = 0; i < num_sims; i++) {
+	for (int i = 0; i < ceil(float(num_sims) / float(BLOCKSIZE)); i++) {
 		call += val[i];
 	}
 	double put = 0;
-	for (int i = 0; i < num_sims; i++) {
+	for (int i = 0; i < ceil(float(num_sims) / float(BLOCKSIZE)); i++) {
 		put += val1[i];
 	}
 
@@ -178,6 +195,7 @@ cudaError_t mcCuda(double *val, double *val1, const int& num_sims, const double&
 Error:
     cudaFree(dev_val);
 	cudaFree(dev_val1);
+	cudaFree(dev_normal);
 	cudaFree(states);
     
     return cudaStatus;

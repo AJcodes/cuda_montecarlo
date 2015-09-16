@@ -1,4 +1,4 @@
-﻿Build started 9/16/2015 4:23:59 PM.
+﻿Build started 9/16/2015 5:10:07 PM.
      1>Project "c:\Users\Adel\documents\visual studio 2010\Projects\cuda_montecarlo\cuda_montecarlo\cuda_montecarlo.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\cuda_montecarlo.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -8,113 +8,121 @@
        Skipping target "AddCudaCompilePropsDeps" because all output files are up-to-date with respect to the input files.
        CudaBuild:
          Compiling CUDA source file kernel.cu...
-         cmd.exe /C "C:\Users\Adel\AppData\Local\Temp\tmp8a467f8c01ca494496df5d111f12abee.cmd"
+         cmd.exe /C "C:\Users\Adel\AppData\Local\Temp\tmp92b2a66bdab440038b5e9e2028cffd6b.cmd"
          "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.0\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2010 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.0\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.0\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\kernel.cu.obj "c:\Users\Adel\documents\visual studio 2010\Projects\cuda_montecarlo\cuda_montecarlo\kernel.cu"
          
          c:\Users\Adel\documents\visual studio 2010\Projects\cuda_montecarlo\cuda_montecarlo>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.0\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2010 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.0\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.0\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\kernel.cu.obj "c:\Users\Adel\documents\visual studio 2010\Projects\cuda_montecarlo\cuda_montecarlo\kernel.cu" 
-     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(33): warning : variable "bid" was declared but never referenced
-         
-     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(96): warning : transfer of control bypasses initialization of:
+     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(107): warning : transfer of control bypasses initialization of:
                      variable "call"
-         (149): here
+         (166): here
                      variable "put"
-         (153): here
+         (170): here
          
-     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(102): warning : transfer of control bypasses initialization of:
+     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(113): warning : transfer of control bypasses initialization of:
                      variable "call"
-         (149): here
+         (166): here
                      variable "put"
-         (153): here
+         (170): here
          
-     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(108): warning : transfer of control bypasses initialization of:
+     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(119): warning : transfer of control bypasses initialization of:
                      variable "call"
-         (149): here
+         (166): here
                      variable "put"
-         (153): here
+         (170): here
          
-     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(114): warning : transfer of control bypasses initialization of:
+     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(125): warning : transfer of control bypasses initialization of:
                      variable "call"
-         (149): here
+         (166): here
                      variable "put"
-         (153): here
+         (170): here
          
-     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(127): warning : transfer of control bypasses initialization of:
+     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(131): warning : transfer of control bypasses initialization of:
                      variable "call"
-         (149): here
+         (166): here
                      variable "put"
-         (153): here
+         (170): here
          
-     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(133): warning : transfer of control bypasses initialization of:
+     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(144): warning : transfer of control bypasses initialization of:
                      variable "call"
-         (149): here
+         (166): here
                      variable "put"
-         (153): here
+         (170): here
          
-     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(139): warning : transfer of control bypasses initialization of:
+     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(150): warning : transfer of control bypasses initialization of:
                      variable "call"
-         (149): here
+         (166): here
                      variable "put"
-         (153): here
+         (170): here
          
-     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(145): warning : transfer of control bypasses initialization of:
+     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(156): warning : transfer of control bypasses initialization of:
                      variable "call"
-         (149): here
+         (166): here
                      variable "put"
-         (153): here
+         (170): here
          
-     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(33): warning : variable "bid" was declared but never referenced
-         
-     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(96): warning : transfer of control bypasses initialization of:
+     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(162): warning : transfer of control bypasses initialization of:
                      variable "call"
-         (149): here
+         (166): here
                      variable "put"
-         (153): here
+         (170): here
          
-     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(102): warning : transfer of control bypasses initialization of:
+     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(107): warning : transfer of control bypasses initialization of:
                      variable "call"
-         (149): here
+         (166): here
                      variable "put"
-         (153): here
+         (170): here
          
-     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(108): warning : transfer of control bypasses initialization of:
+     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(113): warning : transfer of control bypasses initialization of:
                      variable "call"
-         (149): here
+         (166): here
                      variable "put"
-         (153): here
+         (170): here
          
-     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(114): warning : transfer of control bypasses initialization of:
+     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(119): warning : transfer of control bypasses initialization of:
                      variable "call"
-         (149): here
+         (166): here
                      variable "put"
-         (153): here
+         (170): here
          
-     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(127): warning : transfer of control bypasses initialization of:
+     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(125): warning : transfer of control bypasses initialization of:
                      variable "call"
-         (149): here
+         (166): here
                      variable "put"
-         (153): here
+         (170): here
          
-     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(133): warning : transfer of control bypasses initialization of:
+     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(131): warning : transfer of control bypasses initialization of:
                      variable "call"
-         (149): here
+         (166): here
                      variable "put"
-         (153): here
+         (170): here
          
-     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(139): warning : transfer of control bypasses initialization of:
+     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(144): warning : transfer of control bypasses initialization of:
                      variable "call"
-         (149): here
+         (166): here
                      variable "put"
-         (153): here
+         (170): here
          
-     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(145): warning : transfer of control bypasses initialization of:
+     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(150): warning : transfer of control bypasses initialization of:
                      variable "call"
-         (149): here
+         (166): here
                      variable "put"
-         (153): here
+         (170): here
+         
+     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(156): warning : transfer of control bypasses initialization of:
+                     variable "call"
+         (166): here
+                     variable "put"
+         (170): here
+         
+     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(162): warning : transfer of control bypasses initialization of:
+                     variable "call"
+         (166): here
+                     variable "put"
+         (170): here
          
          kernel.cu
-     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(83): warning C4244: 'argument' : conversion from 'float' to 'unsigned int', possible loss of data
-     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(117): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(94): warning C4244: 'argument' : conversion from 'float' to 'unsigned int', possible loss of data
+     1>c:/Users/Adel/documents/visual studio 2010/Projects/cuda_montecarlo/cuda_montecarlo/kernel.cu(134): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
@@ -141,4 +149,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:09.98
+Time Elapsed 00:00:10.27
