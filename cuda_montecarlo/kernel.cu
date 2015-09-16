@@ -15,7 +15,7 @@
 
 #define BLOCKSIZE 64
 
-cudaError_t mcCuda(double *val, double *val1, const int& num_sims, const double& S, const double& K, const double& r, const double& v, const double& T);
+cudaError_t mcCuda(double *val, double *val1, const int grids, const int num_sims, const double S, const double K, const double r, const double v, const double T);
 
 __global__ void init(unsigned int seed, curandState_t* states, double *normal, const int num_sims) {
 	int id = blockIdx.x * BLOCKSIZE + threadIdx.x;
@@ -65,11 +65,12 @@ int main() {
 	double T = 1.0;    // One year until expiry
 	double *val = 0;
 	double *val1 = 0;
+	int grids = (int) ceil(float(num_sims) / float(BLOCKSIZE));
 
-	val = (double *) malloc(num_sims * sizeof(double));
-	val1 = (double *) malloc(num_sims * sizeof(double));
+	val = (double *) malloc(grids * sizeof(double));
+	val1 = (double *) malloc(grids * sizeof(double));
 
-    cudaError_t cudaStatus = mcCuda(val, val1, num_sims, S, K, r, v, T);
+    cudaError_t cudaStatus = mcCuda(val, val1, grids, num_sims, S, K, r, v, T);
     if (cudaStatus != cudaSuccess) {
         fprintf(stderr, "addWithCuda failed!");
         return 1;
@@ -84,14 +85,14 @@ int main() {
     return 0;
 }
 
-cudaError_t mcCuda(double *val, double *val1, const int& num_sims, const double& S, const double& K, const double& r, const double& v, const double& T) {
+cudaError_t mcCuda(double *val, double *val1, const int grids, const int num_sims, const double S, const double K, const double r, const double v, const double T) {
 	double * dev_val = 0;
 	double * dev_val1 = 0;
 	double * dev_normal = 0;
     cudaError_t cudaStatus;
 	curandState_t* states;
 	dim3 dimBlock(BLOCKSIZE);
-    dim3 dimGrid(ceil(float(num_sims) / float(BLOCKSIZE)));
+    dim3 dimGrid(grids);
 	cudaEvent_t start, stop;
 	cudaEventCreate(&start);
 	cudaEventCreate(&stop);
@@ -113,13 +114,13 @@ cudaError_t mcCuda(double *val, double *val1, const int& num_sims, const double&
         goto Error;
     }
 
-	cudaStatus = cudaMalloc((void**)&dev_val, num_sims * sizeof(double));
+	cudaStatus = cudaMalloc((void**)&dev_val, grids * sizeof(double));
     if (cudaStatus != cudaSuccess) {
         fprintf(stderr, "cudaMalloc failed!");
         goto Error;
     }
 
-	cudaStatus = cudaMalloc((void**)&dev_val1, num_sims * sizeof(double));
+	cudaStatus = cudaMalloc((void**)&dev_val1, grids * sizeof(double));
     if (cudaStatus != cudaSuccess) {
         fprintf(stderr, "cudaMalloc failed!");
         goto Error;
@@ -150,13 +151,13 @@ cudaError_t mcCuda(double *val, double *val1, const int& num_sims, const double&
         goto Error;
     }
 
-	cudaStatus = cudaMemcpy(val, dev_val, num_sims * sizeof(double), cudaMemcpyDeviceToHost);
+	cudaStatus = cudaMemcpy(val, dev_val, grids * sizeof(double), cudaMemcpyDeviceToHost);
     if (cudaStatus != cudaSuccess) {
         fprintf(stderr, "cudaMemcpy failed!");
         goto Error;
     }
 
-	cudaStatus = cudaMemcpy(val1, dev_val1, num_sims * sizeof(double), cudaMemcpyDeviceToHost);
+	cudaStatus = cudaMemcpy(val1, dev_val1, grids * sizeof(double), cudaMemcpyDeviceToHost);
     if (cudaStatus != cudaSuccess) {
         fprintf(stderr, "cudaMemcpy failed!");
         goto Error;
@@ -164,11 +165,11 @@ cudaError_t mcCuda(double *val, double *val1, const int& num_sims, const double&
 
 	cudaEventRecord(start1);
 	double call = 0;
-	for (int i = 0; i < ceil(float(num_sims) / float(BLOCKSIZE)); i++) {
+	for (int i = 0; i < grids; i++) {
 		call += val[i];
 	}
 	double put = 0;
-	for (int i = 0; i < ceil(float(num_sims) / float(BLOCKSIZE)); i++) {
+	for (int i = 0; i < grids; i++) {
 		put += val1[i];
 	}
 
