@@ -45,8 +45,8 @@ __global__ void mcKernel(double *normal, const int num_sims, const double S, con
 			c[threadIdx.x] = (payoff_sum / num_sims) * exp(-r*T);
 			p[threadIdx.x] = (payoff_sum1 / num_sims) * exp(-r*T);
 			__syncthreads();
-
-			for (int i = 0; i <BLOCKSIZE; ++i) {
+			#pragma unroll
+			for (int i = 0; i < BLOCKSIZE; ++i) {
 				call_temp += c[i];
 				put_temp += p[i];
 			}
@@ -133,7 +133,7 @@ cudaError_t mcCuda(double *val, double *val1, const int grids, const int num_sim
     }
 
 	init<<<dimGrid, dimBlock>>>(time(0), states, dev_normal, num_sims);
-
+	cudaFree(states);
 	cudaEventRecord(start);
     mcKernel<<<dimGrid, dimBlock>>>(dev_normal, num_sims, S, K, r, v, T, dev_val, dev_val1);
 	cudaEventRecord(stop);
@@ -197,7 +197,7 @@ Error:
     cudaFree(dev_val);
 	cudaFree(dev_val1);
 	cudaFree(dev_normal);
-	cudaFree(states);
+	
     
     return cudaStatus;
 }

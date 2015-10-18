@@ -1,4 +1,4 @@
-﻿Build started 9/17/2015 12:06:15 AM.
+﻿Build started 10/19/2015 3:08:33 AM.
      1>Project "C:\Users\Adel\Documents\Visual Studio 2010\Projects\cuda_montecarlo\cuda_montecarlo\cuda_montecarlo.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\cuda_montecarlo.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -8,7 +8,7 @@
        Skipping target "AddCudaCompilePropsDeps" because all output files are up-to-date with respect to the input files.
        CudaBuild:
          Compiling CUDA source file kernel.cu...
-         cmd.exe /C "C:\Users\Adel\AppData\Local\Temp\tmpf43258a2d88044f6845994eb039497a3.cmd"
+         cmd.exe /C "C:\Users\Adel\AppData\Local\Temp\tmp8dd529556f154278b457fa38d3062f96.cmd"
          "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.0\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2010 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.0\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.0\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\kernel.cu.obj "C:\Users\Adel\Documents\Visual Studio 2010\Projects\cuda_montecarlo\cuda_montecarlo\kernel.cu"
          
          C:\Users\Adel\Documents\Visual Studio 2010\Projects\cuda_montecarlo\cuda_montecarlo>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.0\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2010 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.0\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.0\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\kernel.cu.obj "C:\Users\Adel\Documents\Visual Studio 2010\Projects\cuda_montecarlo\cuda_montecarlo\kernel.cu" 
@@ -148,4 +148,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:11.81
+Time Elapsed 00:00:14.57
